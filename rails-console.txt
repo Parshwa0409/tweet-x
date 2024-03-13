@@ -1,0 +1,748 @@
+irb(main):059* user_followings.each do |following|
+irb(main):060*   f_user =User.find_by(email: following.email)
+irb(main):061*   puts f_user
+irb(main):062*   puts
+irb(main):063> end
+  Following Load (0.2ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ?  [["user_id", 1]]
+/Users/parshwapatil/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activemodel-7.1.3.2/lib/active_model/attribute_methods.rb:489:in `method_missing': undefined method `email' for #<Following id: 1, user_id: 1, following_user_email: "bharatesh.patil@gmail.com", created_at: "2024-03-12 15:54:34.043790000 +0000", updated_at: "2024-03-12 15:54:34.043790000 +0000"> (NoMethodError)
+irb(main):064> user_followings
+=> 
+[#<Following:0x00000001075c1900
+  id: 1,
+  user_id: 1,
+  following_user_email: "bharatesh.patil@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00>,
+ #<Following:0x0000000108c40b40
+  id: 2,
+  user_id: 1,
+  following_user_email: "aratikittur77@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00>]
+irb(main):065* user_followings.each do |following|
+irb(main):066*   f_user =User.find_by(email: following.following_user_email)
+irb(main):067*   puts f_user
+irb(main):068*   puts
+irb(main):069> end
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "bharatesh.patil@gmail.com"], ["LIMIT", 1]]
+#<User:0x0000000108b2b688>
+
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "aratikittur77@gmail.com"], ["LIMIT", 1]]
+#<User:0x0000000108b2af08>
+
+=> 
+[#<Following:0x00000001075c1900
+  id: 1,
+  user_id: 1,
+  following_user_email: "bharatesh.patil@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00>,
+ #<Following:0x0000000108c40b40
+  id: 2,
+  user_id: 1,
+  following_user_email: "aratikittur77@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00>]
+irb(main):070* user_followings.each do |following|
+irb(main):071*   f_user =User.find_by(email: following.following_user_email)
+irb(main):072*   all_f_tweets = f_user.tweets
+irb(main):073*   all_f_tweets.each do |t|
+irb(main):074*     puts
+irb(main):075*     puts t.headline
+irb(main):076*     puts
+irb(main):077*   end
+irb(main):078> end
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "bharatesh.patil@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.3ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 3]]
+
+LI-32
+
+
+LI-64
+
+
+LI-128
+
+
+LI-256
+
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "aratikittur77@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.0ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 2]]
+=> 
+[#<Following:0x00000001075c1900
+  id: 1,
+  user_id: 1,
+  following_user_email: "bharatesh.patil@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00>,
+ #<Following:0x0000000108c40b40
+  id: 2,
+  user_id: 1,
+  following_user_email: "aratikittur77@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00>]
+irb(main):079> User.find_by(email:"aratikittur77@gmail.com")
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "aratikittur77@gmail.com"], ["LIMIT", 1]]
+=> 
+#<User:0x0000000108c8fc90
+ id: 2,
+ first_name: "Arati",
+ last_name: "Patil",
+ email: "aratikittur77@gmail.com",
+ phone: "9449518797",
+ created_at: Tue, 12 Mar 2024 15:52:13.644280000 UTC +00:00,
+ updated_at: Tue, 12 Mar 2024 15:52:13.644280000 UTC +00:00>
+irb(main):080> User.find_by(email:"aratikittur77@gmail.com").tweets.create(headline:"I AM GREAT ;)",tweet:"Greatness is Motherhood, Motherhood is Greatness"
+)
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "aratikittur77@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.1ms)  begin transaction
+  Tweet Create (0.4ms)  INSERT INTO "tweets" ("user_id", "headline", "tweet", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"  [["user_id", 2], ["headline", "I AM GREAT ;)"], ["tweet", "Greatness is Motherhood, Motherhood is Greatness"], ["created_at", "2024-03-12 16:06:15.235271"], ["updated_at", "2024-03-12 16:06:15.235271"]]
+  TRANSACTION (0.4ms)  commit transaction
+=> 
+#<Tweet:0x0000000108ac08d8
+ id: 5,
+ user_id: 2,
+ headline: "I AM GREAT ;)",
+ tweet: "Greatness is Motherhood, Motherhood is Greatness",
+ created_at: Tue, 12 Mar 2024 16:06:15.235271000 UTC +00:00,
+ updated_at: Tue, 12 Mar 2024 16:06:15.235271000 UTC +00:00>
+irb(main):081* user_followings.each do |following|
+irb(main):082*   f_user =User.find_by(email: following.following_user_email)
+irb(main):083*   all_f_tweets = f_user.tweets
+irb(main):084*   all_f_tweets.each do |t|
+irb(main):085*     puts
+irb(main):086*     puts t.headline
+irb(main):087*     puts
+irb(main):088*   end
+irb(main):089> end
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "bharatesh.patil@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 3]]
+
+LI-32
+
+
+LI-64
+
+
+LI-128
+
+
+LI-256
+
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "aratikittur77@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.0ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 2]]
+
+I AM GREAT ;)
+
+=> 
+[#<Following:0x00000001075c1900
+  id: 1,
+  user_id: 1,
+  following_user_email: "bharatesh.patil@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:54:34.043790000 UTC +00:00>,
+ #<Following:0x0000000108c40b40
+  id: 2,
+  user_id: 1,
+  following_user_email: "aratikittur77@gmail.com",
+  created_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00,
+  updated_at: Tue, 12 Mar 2024 15:59:51.949595000 UTC +00:00>]
+irb(main):090> 
+
+
+
+
+// GETTING THE TWEETS
+
+user = User.find_by(id:session[:user_id])
+user_followings = user.followings.pluck(:following_user_email).map {|email_id| User.find_by(email:email_id)}
+
+user_followings.each do |user|
+  user.tweets.each {|t| puts("\n\nHeadline:#{t.headline}, Content:#{t.tweet}")}
+ end
+
+
+
+
+
+
+
+ ///////////////
+
+ irb(main):026> mani_following_users
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):027> mani_following_users.each {|user| puts(user.tweets.headline)}
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? /* loading for inspect */ LIMIT ?  [["user_id", 4], ["LIMIT", 11]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? /* loading for inspect */ LIMIT ?  [["user_id", 4], ["LIMIT", 11]]
+/Users/parshwapatil/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activerecord-7.1.3.2/lib/active_record/relation/delegation.rb:124:in `method_missing': undefined method `headline' for #<ActiveRecord::Associations::CollectionProxy [#<Tweet id: 6, user_id: 4, headline: "Maggi in 2 mins???", tweet: "Common bro, it is a lie, the average time taken to...", created_at: "2024-03-13 16:11:35.083873000 +0000", updated_at: "2024-03-13 16:11:35.083873000 +0000">, #<Tweet id: 7, user_id: 4, headline: "Women drive better!!!", tweet: "Physc! Just kidding 😂😂", created_at: "2024-03-13 16:12:22.491895000 +0000", updated_at: "2024-03-13 16:12:22.491895000 +0000">, #<Tweet id: 8, user_id: 4, headline: "My Bike", tweet: "A MAN WITHOUT A BIKE, IS A MAN WITHOUT A PURPOSE", created_at: "2024-03-13 16:13:14.738702000 +0000", updated_at: "2024-03-13 16:13:14.738702000 +0000">, #<Tweet id: 9, user_id: 4, headline: "ELON MUSK OWNS TWITTER", tweet: "ELON BROUGH TWITTER FOR $44 BILLION & RENAMED IT A...", created_at: "2024-03-13 16:14:02.059239000 +0000", updated_at: "2024-03-13 16:14:02.059239000 +0000">]> (NoMethodError)
+irb(main):028> mani_following_users.each {|user| puts(user.tweets)}
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 4]]
+#<Tweet:0x000000010acc0f00>
+#<Tweet:0x000000010acc0dc0>
+#<Tweet:0x000000010acc0c80>
+#<Tweet:0x000000010acc0a00>
+  Tweet Load (0.0ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 6]]
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):029> mani_following_users.each {|user| puts(user.tweets.pluck(:headline))}
+Maggi in 2 mins???
+Women drive better!!!
+My Bike
+ELON MUSK OWNS TWITTER
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):030* mani_following_users.each do |user|
+irb(main):031*   user_tweets = user.tweets
+irb(main):032*   user_tweets.each {|t| puts("Headline:#{t.headline}, Content:#{t.tweet}")}
+irb(main):033> end
+Headline:Maggi in 2 mins???, Content:Common bro, it is a lie, the average time taken to cook one pack of Maggi takes 8 Mins
+Headline:Women drive better!!!, Content:Physc! Just kidding 😂😂
+Headline:My Bike, Content:A MAN WITHOUT A BIKE, IS A MAN WITHOUT A PURPOSE
+Headline:ELON MUSK OWNS TWITTER, Content:ELON BROUGH TWITTER FOR $44 BILLION & RENAMED IT AS 'X'
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):034* mani_following_users.each do |user|
+irb(main):035*   user_tweets = user.tweets
+irb(main):036*   user_tweets.each {|t| puts("\n\nHeadline:#{t.headline}, Content:#{t.tweet}")}
+irb(main):037> end
+
+
+Headline:Maggi in 2 mins???, Content:Common bro, it is a lie, the average time taken to cook one pack of Maggi takes 8 Mins
+
+
+Headline:Women drive better!!!, Content:Physc! Just kidding 😂😂
+
+
+Headline:My Bike, Content:A MAN WITHOUT A BIKE, IS A MAN WITHOUT A PURPOSE
+
+
+Headline:ELON MUSK OWNS TWITTER, Content:ELON BROUGH TWITTER FOR $44 BILLION & RENAMED IT AS 'X'
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):038* mani_following_users.each do |user|
+irb(main):039*   user_tweets = user.tweets
+irb(main):040*   user_tweets.each {|t| puts("\n\nHeadline:#{t.headline}, Content:#{t.tweet}")}
+irb(main):041> end
+
+
+Headline:Maggi in 2 mins???, Content:Common bro, it is a lie, the average time taken to cook one pack of Maggi takes 8 Mins
+
+
+Headline:Women drive better!!!, Content:Physc! Just kidding 😂😂
+
+
+Headline:My Bike, Content:A MAN WITHOUT A BIKE, IS A MAN WITHOUT A PURPOSE
+
+
+Headline:ELON MUSK OWNS TWITTER, Content:ELON BROUGH TWITTER FOR $44 BILLION & RENAMED IT AS 'X'
+=> 
+[#<User:0x000000010a8e20a0
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010a8e1920
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):042> Tweet.all
+  Tweet Load (0.3ms)  SELECT "tweets".* FROM "tweets" /* loading for pp */ LIMIT ?  [["LIMIT", 11]]
+=> 
+[#<Tweet:0x000000010a8ed0e0
+  id: 6,
+  user_id: 4,
+  headline: "Maggi in 2 mins???",
+  tweet: "Common bro, it is a lie, the average time taken to cook one pack of Maggi takes 8 Mins",
+  created_at: Wed, 13 Mar 2024 16:11:35.083873000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:11:35.083873000 UTC +00:00>,
+ #<Tweet:0x000000010a8ecfa0
+  id: 7,
+  user_id: 4,
+  headline: "Women drive better!!!",
+  tweet: "Physc! Just kidding 😂😂",
+  created_at: Wed, 13 Mar 2024 16:12:22.491895000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:12:22.491895000 UTC +00:00>,
+ #<Tweet:0x000000010a8ece60
+  id: 8,
+  user_id: 4,
+  headline: "My Bike",
+  tweet: "A MAN WITHOUT A BIKE, IS A MAN WITHOUT A PURPOSE",
+  created_at: Wed, 13 Mar 2024 16:13:14.738702000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:13:14.738702000 UTC +00:00>,
+ #<Tweet:0x000000010a8ecd20
+  id: 9,
+  user_id: 4,
+  headline: "ELON MUSK OWNS TWITTER",
+  tweet: "ELON BROUGH TWITTER FOR $44 BILLION & RENAMED IT AS 'X'",
+  created_at: Wed, 13 Mar 2024 16:14:02.059239000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:14:02.059239000 UTC +00:00>]
+irb(main):043> Tweet.user
+/Users/parshwapatil/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activerecord-7.1.3.2/lib/active_record/dynamic_matchers.rb:22:in `method_missing': undefined method `user' for Tweet:Class (NoMethodError)
+Did you mean?  upsert
+irb(main):044> Tweet.first.user
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010a8e57a0
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):045> Tweet.first.user.email
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> "parshwapatil9@gmail.com"
+irb(main):046> mani
+=> 
+#<User:0x000000010aceb048
+ id: 8,
+ first_name: "Manikanta",
+ last_name: "Parameswarappa",
+ email: "mani.p@gmail.com",
+ phone: "9965458899",
+ created_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):047> mani.followings
+  Following Load (0.3ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 8], ["LIMIT", 11]]
+=> 
+[#<Following:0x000000010acaa160
+  id: 3,
+  user_id: 8,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00>,
+ #<Following:0x000000010acaa020
+  id: 4,
+  user_id: 8,
+  following_user_email: "parshwapatilnhce@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00>]
+irb(main):048> User.find(4)
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010acef3c8
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):049> user = User.find(4)
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010a8ed4a0
+...
+irb(main):050> user.tweets.create(headline:"DEMO TWEET", tweet:"Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality")
+  TRANSACTION (0.1ms)  begin transaction
+  Tweet Create (1.4ms)  INSERT INTO "tweets" ("user_id", "headline", "tweet", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"  [["user_id", 4], ["headline", "DEMO TWEET"], ["tweet", "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality"], ["created_at", "2024-03-13 17:20:21.418262"], ["updated_at", "2024-03-13 17:20:21.418262"]]
+  TRANSACTION (0.7ms)  commit transaction
+=> 
+#<Tweet:0x000000010a8e2320
+ id: 10,
+ user_id: 4,
+ headline: "DEMO TWEET",
+ tweet: "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality",
+ created_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00>
+irb(main):051> Tweet.last
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> 
+#<Tweet:0x000000010a8e9c60
+ id: 10,
+ user_id: 4,
+ headline: "DEMO TWEET",
+ tweet: "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality",
+ created_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00>
+irb(main):052> Tweet.last.user
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010acebf48
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):053> user
+=> 
+#<User:0x000000010a8ed4a0
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):054> User.last
+  User Load (0.3ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> 
+#<User:0x000000010aa65f08
+ id: 8,
+ first_name: "Manikanta",
+ last_name: "Parameswarappa",
+ email: "mani.p@gmail.com",
+ phone: "9965458899",
+ created_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):055> User.all
+  User Load (0.2ms)  SELECT "users".* FROM "users" /* loading for pp */ LIMIT ?  [["LIMIT", 11]]
+=> 
+[#<User:0x000000010aa67bc8
+  id: 4,
+  first_name: "Parshwa",
+  last_name: "Patil",
+  email: "parshwapatil9@gmail.com",
+  phone: "8197462988",
+  created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010aa67a88
+  id: 5,
+  first_name: "Arati",
+  last_name: "Patil",
+  email: "aratikittur77@gmail.com",
+  phone: "9449518797",
+  created_at: Wed, 13 Mar 2024 14:31:53.307607000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:31:53.307607000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010aa67948
+  id: 6,
+  first_name: "Paras",
+  last_name: "Patil",
+  email: "parshwapatilnhce@gmail.com",
+  phone: "6361334566",
+  created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010aa67808
+  id: 7,
+  first_name: " Bharatesh ",
+  last_name: "Patil",
+  email: "bharatesh.patil@gmail.com",
+  phone: "6360786262",
+  created_at: Wed, 13 Mar 2024 15:13:04.858189000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 15:13:04.858189000 UTC +00:00,
+  password_digest: "[FILTERED]">,
+ #<User:0x000000010aa676c8
+  id: 8,
+  first_name: "Manikanta",
+  last_name: "Parameswarappa",
+  email: "mani.p@gmail.com",
+  phone: "9965458899",
+  created_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+  password_digest: "[FILTERED]">]
+irb(main):056> mani.followings
+  Following Load (0.2ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 8], ["LIMIT", 11]]
+=> 
+[#<Following:0x000000010acce4c0
+  id: 3,
+  user_id: 8,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00>,
+ #<Following:0x000000010acce380
+  id: 4,
+  user_id: 8,
+  following_user_email: "parshwapatilnhce@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00>]
+irb(main):057> User.find(4)
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010ace2088
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):058> User.find(8)
+  User Load (0.3ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 8], ["LIMIT", 1]]
+=> 
+#<User:0x000000010acc67c0
+ id: 8,
+ first_name: "Manikanta",
+ last_name: "Parameswarappa",
+ email: "mani.p@gmail.com",
+ phone: "9965458899",
+ created_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):059> Tweet
+=> Tweet(id: integer, user_id: integer, headline: string, tweet: string, created_at: datetime, updated_at: datetime)
+irb(main):060> Tweet.last
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> 
+#<Tweet:0x000000010a8e5ca0
+ id: 10,
+ user_id: 4,
+ headline: "DEMO TWEET",
+ tweet: "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality",
+ created_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00>
+irb(main):061> Tweet.last.user
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> 
+#<User:0x000000010ace7f88
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):062> Tweet.last.user.email
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" ORDER BY "tweets"."id" DESC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+=> "parshwapatil9@gmail.com"
+irb(main):063> User.find_by(email:"parshwapatilnhce@gmail.com")
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "parshwapatilnhce@gmail.com"], ["LIMIT", 1]]
+=> 
+#<User:0x000000010a8e0ca0
+ id: 6,
+ first_name: "Paras",
+ last_name: "Patil",
+ email: "parshwapatilnhce@gmail.com",
+ phone: "6361334566",
+ created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):064> user = User.find_by(email:"parshwapatilnhce@gmail.com")
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "parshwapatilnhce@gmail.com"], ["LIMIT", 1]]
+=> 
+#<User:0x000000010acc9880
+...
+irb(main):065> user
+=> 
+#<User:0x000000010acc9880
+ id: 6,
+ first_name: "Paras",
+ last_name: "Patil",
+ email: "parshwapatilnhce@gmail.com",
+ phone: "6361334566",
+ created_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:34:00.092045000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):066> user.tweets
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 6], ["LIMIT", 11]]
+=> []
+irb(main):067> user.tweets.create(headline:"DEMO TWEET", tweet:"Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality");
+  TRANSACTION (0.1ms)  begin transaction
+  Tweet Create (0.6ms)  INSERT INTO "tweets" ("user_id", "headline", "tweet", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"  [["user_id", 6], ["headline", "DEMO TWEET"], ["tweet", "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality"], ["created_at", "2024-03-13 17:24:17.803240"], ["updated_at", "2024-03-13 17:24:17.803240"]]
+  TRANSACTION (1.3ms)  commit transaction
+irb(main):068> User.first
+  User Load (0.2ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+=> 
+#<User:0x000000010accab40
+ id: 4,
+ first_name: "Parshwa",
+ last_name: "Patil",
+ email: "parshwapatil9@gmail.com",
+ phone: "8197462988",
+ created_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 14:30:07.980256000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):069> User.first.tweets.last
+  User Load (0.2ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  Tweet Load (0.2ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? ORDER BY "tweets"."id" DESC LIMIT ?  [["user_id", 4], ["LIMIT", 1]]
+=> 
+#<Tweet:0x000000010a8e3fe0
+ id: 10,
+ user_id: 4,
+ headline: "DEMO TWEET",
+ tweet: "Demo tweet, done by 'parshwapatilnhce@gmail.com' to test the functionality",
+ created_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:20:21.418262000 UTC +00:00>
+irb(main):070> User.first.tweets.last.update(tweet: "Demo tweet, done by 'parshwapatil9@gmail.com' to test the functionality")
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? ORDER BY "tweets"."id" DESC LIMIT ?  [["user_id", 4], ["LIMIT", 1]]
+  TRANSACTION (0.1ms)  begin transaction
+  Tweet Update (1.5ms)  UPDATE "tweets" SET "tweet" = ?, "updated_at" = ? WHERE "tweets"."id" = ?  [["tweet", "Demo tweet, done by 'parshwapatil9@gmail.com' to test the functionality"], ["updated_at", "2024-03-13 17:25:13.240020"], ["id", 10]]
+  TRANSACTION (0.1ms)  commit transaction
+=> true
+irb(main):071> User.first.followings
+  User Load (0.3ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  Following Load (0.1ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 4], ["LIMIT", 11]]
+=> []
+irb(main):072> Following
+=> Following(id: integer, user_id: integer, following_user_email: string, created_at: datetime, updated_at: datetime)
+irb(main):073> Following.all
+  Following Load (0.2ms)  SELECT "followings".* FROM "followings" /* loading for pp */ LIMIT ?  [["LIMIT", 11]]
+=> 
+[#<Following:0x000000010ac08720
+  id: 3,
+  user_id: 8,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:10.386873000 UTC +00:00>,
+ #<Following:0x000000010ac085e0
+  id: 4,
+  user_id: 8,
+  following_user_email: "parshwapatilnhce@gmail.com",
+  created_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 16:15:31.193568000 UTC +00:00>]
+irb(main):074> User.first.followings.create(following_user_email:User.find(8).email)
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 8], ["LIMIT", 1]]
+  TRANSACTION (0.1ms)  begin transaction
+  Following Create (0.3ms)  INSERT INTO "followings" ("user_id", "following_user_email", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"  [["user_id", 4], ["following_user_email", "mani.p@gmail.com"], ["created_at", "2024-03-13 17:27:28.626661"], ["updated_at", "2024-03-13 17:27:28.626661"]]
+  TRANSACTION (0.6ms)  commit transaction
+=> 
+#<Following:0x000000010aca07a0
+ id: 5,
+ user_id: 4,
+ following_user_email: "mani.p@gmail.com",
+ created_at: Wed, 13 Mar 2024 17:27:28.626661000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:27:28.626661000 UTC +00:00>
+irb(main):075> User.first.followings.create(following_user_email:User.find(6).email)
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?  [["id", 6], ["LIMIT", 1]]
+  TRANSACTION (0.1ms)  begin transaction
+  Following Create (0.4ms)  INSERT INTO "followings" ("user_id", "following_user_email", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"  [["user_id", 4], ["following_user_email", "parshwapatilnhce@gmail.com"], ["created_at", "2024-03-13 17:27:37.821647"], ["updated_at", "2024-03-13 17:27:37.821647"]]
+  TRANSACTION (0.1ms)  commit transaction
+=> 
+#<Following:0x000000010ac42e48
+ id: 6,
+ user_id: 4,
+ following_user_email: "parshwapatilnhce@gmail.com",
+ created_at: Wed, 13 Mar 2024 17:27:37.821647000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:27:37.821647000 UTC +00:00>
+irb(main):076> User.last
+  User Load (0.2ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?  [["LIMIT", 1]]
+=> 
+#<User:0x000000010ace5f08
+ id: 8,
+ first_name: "Manikanta",
+ last_name: "Parameswarappa",
+ email: "mani.p@gmail.com",
+ phone: "9965458899",
+ created_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 15:13:56.926576000 UTC +00:00,
+ password_digest: "[FILTERED]">
+irb(main):077> User.last.tweets.create(headline:"Demo Tweet", tweet:"Demo tweet done by 'mani.p@gmail.com' to test the functionality")
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?  [["LIMIT", 1]]
+  TRANSACTION (0.1ms)  begin transaction
+  Tweet Create (0.4ms)  INSERT INTO "tweets" ("user_id", "headline", "tweet", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"  [["user_id", 8], ["headline", "Demo Tweet"], ["tweet", "Demo tweet done by 'mani.p@gmail.com' to test the functionality"], ["created_at", "2024-03-13 17:28:38.479736"], ["updated_at", "2024-03-13 17:28:38.479736"]]
+  TRANSACTION (0.2ms)  commit transaction
+=> 
+#<Tweet:0x000000010ac85c98
+ id: 12,
+ user_id: 8,
+ headline: "Demo Tweet",
+ tweet: "Demo tweet done by 'mani.p@gmail.com' to test the functionality",
+ created_at: Wed, 13 Mar 2024 17:28:38.479736000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 17:28:38.479736000 UTC +00:00>
+irb(main):078> 

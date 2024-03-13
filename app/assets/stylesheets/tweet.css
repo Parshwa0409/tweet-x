@@ -1,0 +1,18 @@
+div.tweet {
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: #76abae;
+
+  padding: 2rem;
+  margin: 1rem 0;
+}
+
+div.tweet > h4,
+h5 {
+  font-weight: bold;
+  display: inline-block;
+}
+
+div.tweet > div {
+  margin-top: 1rem;
+}

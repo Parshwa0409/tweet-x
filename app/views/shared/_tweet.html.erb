@@ -1,0 +1,10 @@
+<%= stylesheet_link_tag 'tweet.css' %>
+<div class="tweet">
+  <h4>Author: <%= tweet.user.email%></h4>
+  <div>
+    <h5>Headline: </h5> <%= tweet.headline%>
+  </div>
+  <div>
+    <h5>Content: </h5> <%= tweet.tweet%>
+  </div>
+</div>

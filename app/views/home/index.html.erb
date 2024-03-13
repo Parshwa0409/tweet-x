@@ -1,0 +1,5 @@
+<% if !(@all_tweets.empty?) && !(session[:user_id].nil?) %>
+    <% @all_tweets.each do |t|%>
+        <%= render partial:"shared/tweet", locals:{ tweet:t } %> 
+    <% end %>
+<% end %>

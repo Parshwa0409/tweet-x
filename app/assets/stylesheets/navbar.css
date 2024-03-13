@@ -1,0 +1,47 @@
+/* 31363F - bg-black */
+/* EEEEEE - whitish-grey */
+/* 76ABAE - tourquise */
+
+:root {
+  --black-color: #31363f;
+  --white-color: #eeeeee;
+  --turquoise-color: #76abae;
+}
+
+div.navbar {
+  background-color: var(--black-color);
+  color: var(--white-color);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 1rem;
+}
+
+#brand-text {
+  font-weight: bold;
+}
+
+#nav-list {
+  list-style-type: none;
+  margin-top: auto;
+
+  display: flex;
+}
+
+.nav-items {
+  font-size: 1.15rem;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: var(--white-color);
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--turquoise-color);
+}

@@ -1,0 +1,42 @@
+<%= form_with model: User, url: sign_up_path, data: { turbo: false }  do |form| %>
+    <% if @user.errors.any? %>
+        <div class="alert alert-danger my-3" role="alert">
+            <% @user.errors.full_messages.each do |msg|%>
+                <%=msg%><br/>
+            <% end %>
+        </div>
+    <%end%>
+
+    <div class="my-3 py-2">
+        <%= form.label :first_name %>
+        <%= form.text_field :first_name, class:"form-control", placeholder:"John"%>
+    </div>
+
+    <div class="my-3 py-2">
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name, class:"form-control", placeholder:"Doe"%>
+    </div>
+
+    <div class="my-3 py-2">
+        <%= form.label :email %>
+        <%= form.text_field :email, class:"form-control", placeholder:"j.doe@plansource.com"%>
+    </div>
+
+    <div class="my-3 py-2">
+        <%= form.label :phone %>
+        <%= form.text_field :phone, class:"form-control", placeholder:"8197956872"%>
+    </div>
+
+    <div class="my-3 py-2">
+        <%= form.label :password %>
+        <%= form.password_field :password, class:"form-control", placeholder:"********"%>
+    </div>
+    <div class="my-3 py-2">
+        <%= form.label :password_confirmation  %>
+        <%= form.password_field :password_confirmation, class:"form-control", placeholder:"********"%>
+    </div>
+
+    <div class="my-3">
+        <%= form.submit "Sign Up", class:"btn btn-lg btn-block btn-primary"%>
+    </div>
+<% end %>

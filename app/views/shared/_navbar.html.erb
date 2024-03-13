@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag 'navbar.css' %>
+
+<div class="navbar">
+  <h1 id="brand-text"><%= link_to "Tweet-X", root_path %></h1>
+
+  <ul id="nav-list">
+    <% if session[:user_id].nil? %>
+      <li><%= link_to "Sign Up", sign_up_path, class:"nav-items"%></li>
+      <li><%= link_to "Sign In", sign_in_path, class:"nav-items"%></li>
+    <% else %>
+      <li><%= button_to "Log Out", logout_path, method: :delete, class:"nav-items btn btn-danger"%></li>
+    <% end %>
+  </ul>
+</div>
