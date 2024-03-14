@@ -1,0 +1,17 @@
+<%= form_with model: Tweet, url: create_tweet_path ,data: { turbo: false }  do |form| %>
+
+    
+    <div>
+        <h1><%= form.label :headline %></h1>
+        <%= form.text_field :headline, class:"form-control", placeholder:"Tweet Headling"%>
+    </div>
+
+    <div >
+        <h1><%= form.label :tweet %></h1>
+        <%= form.text_field :tweet, class:"form-control", placeholder:"Tweet Content"%>
+    </div>
+
+    <div class="col-3 my-3">
+        <%= form.submit "Tweet It", class:"btn btn-lg btn-block btn-primary"%>
+    </div>
+<% end %>

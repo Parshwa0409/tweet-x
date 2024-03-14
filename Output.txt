@@ -1,0 +1,230 @@
+3.2.2 :032 > prathiksha.followings
+  Following Load (0.1ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 4], ["LIMIT", 11]]
+ => 
+[#<Following:0x00000001060df780
+  id: 1,
+  user_id: 4,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00>,
+ #<Following:0x00000001060df640
+  id: 2,
+  user_id: 4,
+  following_user_email: "mani.p@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00>] 
+3.2.2 :033 > prathiksha.followings.each do |user_email|
+3.2.2 :034 >   f_user = User.find_by(email:u_email.following_user_email)
+3.2.2 :035 >   puts f_user
+3.2.2 :036 > end
+  Following Load (0.1ms)  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = ?  [["user_id", 4]]
+(irb):34:in `block in <main>': undefined local variable or method `u_email' for main:Object (NameError)
+
+  f_user = User.find_by(email:u_email.following_user_email)
+                              ^^^^^^^
+Did you mean?  user_email
+3.2.2 :037 > prathiksha.followings.each do |user_email|
+3.2.2 :038 >   f_user = User.find_by(email:user_email.following_user_email)
+3.2.2 :039 >   puts f_user
+3.2.2 :040 > end
+  User Load (0.2ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "parshwapatil9@gmail.com"], ["LIMIT", 1]]
+#<User:0x00000001060d1180>
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+#<User:0x00000001060d0a00>
+ => 
+[#<Following:0x00000001047c5178
+  id: 1,
+  user_id: 4,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00>,
+ #<Following:0x000000010615f7a0
+  id: 2,
+  user_id: 4,
+  following_user_email: "mani.p@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00>] 
+3.2.2 :041 > prathiksha.followings.each do |user_email|
+3.2.2 :042 >   f_user = User.find_by(email:user_email.following_user_email)
+3.2.2 :043 >   f_tweets = f_user.tweets
+3.2.2 :044 >   f_tweets.each do |t|
+3.2.2 :045 >     puts("Tweet: #{t.headline} & Content: #{t.tweet}")
+3.2.2 :046 >   end
+3.2.2 :047 > end
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "parshwapatil9@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 1]]
+Tweet: T1 & Content: Tweet One
+Tweet: T2 & Content: Tweet Two
+Tweet: T3 & Content: Tweet Three
+Tweet: T4 & Content: Tweet Four
+Tweet: T5 & Content: Tweet Five
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 3]]
+ => 
+[#<Following:0x00000001047c5178
+  id: 1,
+  user_id: 4,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00>,
+ #<Following:0x000000010615f7a0
+  id: 2,
+  user_id: 4,
+  following_user_email: "mani.p@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00>] 
+3.2.2 :048 > prathiksha
+ => 
+#<User:0x00000001060d4380
+ id: 4,
+ first_name: "Prathiksha",
+ last_name: "Koteshwara",
+ email: "prathiksha.r_k@gmail.com",
+ phone: "6354668797",
+ created_at: Wed, 13 Mar 2024 04:34:01.186111000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 04:34:01.186111000 UTC +00:00> 
+3.2.2 :049 > prathiksha
+ => 
+#<User:0x00000001060d4380
+ id: 4,
+ first_name: "Prathiksha",
+ last_name: "Koteshwara",
+ email: "prathiksha.r_k@gmail.com",
+ phone: "6354668797",
+ created_at: Wed, 13 Mar 2024 04:34:01.186111000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 04:34:01.186111000 UTC +00:00> 
+3.2.2 :050 > prathiksha.followings
+ => 
+[#<Following:0x00000001047c5178
+  id: 1,
+  user_id: 4,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00>,
+ #<Following:0x000000010615f7a0
+  id: 2,
+  user_id: 4,
+  following_user_email: "mani.p@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00>] 
+3.2.2 :051 > user.first.tweets
+(irb):51:in `<main>': undefined local variable or method `user' for main:Object (NameError)
+
+user.first.tweets
+^^^^
+Did you mean?  super
+3.2.2 :052 > User.first.tweets
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 1], ["LIMIT", 11]]
+ => 
+[#<Tweet:0x000000010613fb58
+  id: 1,
+  user_id: 1,
+  headline: "T1",
+  tweet: "Tweet One",
+  created_at: Wed, 13 Mar 2024 04:35:17.619447000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:35:17.619447000 UTC +00:00>,
+ #<Tweet:0x000000010613fa18
+  id: 2,
+  user_id: 1,
+  headline: "T2",
+  tweet: "Tweet Two",
+  created_at: Wed, 13 Mar 2024 04:35:28.679231000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:35:28.679231000 UTC +00:00>,
+ #<Tweet:0x000000010613f8d8
+  id: 3,
+  user_id: 1,
+  headline: "T3",
+  tweet: "Tweet Three",
+  created_at: Wed, 13 Mar 2024 04:35:37.786010000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:35:37.786010000 UTC +00:00>,
+ #<Tweet:0x000000010613f3d8
+  id: 4,
+  user_id: 1,
+  headline: "T4",
+  tweet: "Tweet Four",
+  created_at: Wed, 13 Mar 2024 04:35:42.553280000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:36:02.749061000 UTC +00:00>,
+ #<Tweet:0x000000010613eed8
+  id: 5,
+  user_id: 1,
+  headline: "T5",
+  tweet: "Tweet Five",
+  created_at: Wed, 13 Mar 2024 04:36:19.646878000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:36:19.646878000 UTC +00:00>] 
+3.2.2 :053 > User.find_by(email:"mani.p@gmail.com")
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+ => 
+#<User:0x00000001060d3fc0
+ id: 3,
+ first_name: "Manikanta",
+ last_name: "Parameswarappa",
+ email: "mani.p@gmail.com",
+ phone: "6354667899",
+ created_at: Wed, 13 Mar 2024 04:33:18.974723000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 04:33:18.974723000 UTC +00:00> 
+3.2.2 :054 > User.find_by(email:"mani.p@gmail.com").tweets
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ? /* loading for pp */ LIMIT ?  [["user_id", 3], ["LIMIT", 11]]
+ => [] 
+3.2.2 :055 > User.find_by(email:"mani.p@gmail.com").tweets.create(headline:"JS",tweet:"I love JavaScript")
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+  TRANSACTION (0.0ms)  begin transaction
+  Tweet Create (0.3ms)  INSERT INTO "tweets" ("user_id", "headline", "tweet", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"  [["user_id", 3], ["headline", "JS"], ["tweet", "I love JavaScript"], ["created_at", "2024-03-13 04:43:12.244988"], ["updated_at", "2024-03-13 04:43:12.244988"]]
+  TRANSACTION (0.1ms)  commit transaction
+ => 
+#<Tweet:0x0000000106c55b50
+ id: 6,
+ user_id: 3,
+ headline: "JS",
+ tweet: "I love JavaScript",
+ created_at: Wed, 13 Mar 2024 04:43:12.244988000 UTC +00:00,
+ updated_at: Wed, 13 Mar 2024 04:43:12.244988000 UTC +00:00> 
+3.2.2 :056 > 
+3.2.2 :057 > 
+3.2.2 :058 > 
+3.2.2 :059 > 
+3.2.2 :060 > prathiksha.followings.each do |user_email|
+3.2.2 :061 >   f_user = User.find_by(email:user_email.following_user_email)
+3.2.2 :062 >   f_tweets = f_user.tweets
+3.2.2 :063 >   f_tweets.each do |t|
+3.2.2 :064 >     puts("Tweet: #{t.headline} & Content: #{t.tweet}")
+3.2.2 :065 >   end
+3.2.2 :066 > end
+  User Load (0.1ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "parshwapatil9@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.1ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 1]]
+Tweet: T1 & Content: Tweet One
+Tweet: T2 & Content: Tweet Two
+Tweet: T3 & Content: Tweet Three
+Tweet: T4 & Content: Tweet Four
+Tweet: T5 & Content: Tweet Five
+  User Load (0.0ms)  SELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "mani.p@gmail.com"], ["LIMIT", 1]]
+  Tweet Load (0.0ms)  SELECT "tweets".* FROM "tweets" WHERE "tweets"."user_id" = ?  [["user_id", 3]]
+Tweet: JS & Content: I love JavaScript
+ => 
+[#<Following:0x00000001047c5178
+  id: 1,
+  user_id: 4,
+  following_user_email: "parshwapatil9@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:37:54.027240000 UTC +00:00>,
+ #<Following:0x000000010615f7a0
+  id: 2,
+  user_id: 4,
+  following_user_email: "mani.p@gmail.com",
+  created_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00,
+  updated_at: Wed, 13 Mar 2024 04:38:02.561617000 UTC +00:00>] 
+3.2.2 :067 > User
+ => User(id: integer, first_name: string, last_name: string, email: string, phone: string, created_at: datetime, updated_at: datetime) 
+3.2.2 :068 > Tweet
+ => Tweet(id: integer, user_id: integer, headline: string, tweet: string, created_at: datetime, updated_at: datetime) 
+3.2.2 :069 > Following
+ => Following(id: integer, user_id: integer, following_user_email: string, created_at: datetime, updated_at: datetime) 
+3.2.2 :070 > 
+
+
+
+
+
+
+

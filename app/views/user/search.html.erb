@@ -1,0 +1,28 @@
+<%= form_for :search, url: search_path, data: { turbo: false }  do |form| %>
+
+<div class="row d-flex align-items-end py-2">
+    <div class="col-9 my-3">
+        <%= form.label :email %>
+        <%= form.text_field :email, class:"form-control", placeholder:"j.doe@plansource.com"%>
+    </div>
+
+    <div class="col-3 my-3">
+        <%= form.submit "Search User", class:"btn btn-lg btn-block btn-primary"%>
+    </div>
+</div>
+<% end %>
+
+
+<% if !@matching_users.nil?  && !@matching_users.empty? %>
+    <% @matching_users.each do |user|%>
+        <div class="seached-user d-flex  justify-content-between align-items-center">
+            <div >
+                <h5>Name: <%= user.first_name%> <%= user.last_name%></h5>
+                <h5>Email: <%= user.email%> </h5>
+            </div>
+            <%if  !@current_user.followings.pluck(:following_user_email).include?(user.email) && @current_user.email!=user.email%>
+                <%= button_to "Add Follower", add_following_path ,params:{email: user.email},method: :post, class:"nav-items btn btn-danger"%>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>
